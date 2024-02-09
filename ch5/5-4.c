@@ -1,22 +1,31 @@
 #include <stdio.h>
+#include <string.h>
 
 int strend(char *s, char *t)
 {
-    // consider strings to always end with an empty string
-    if (!*t)
-    {
-        return 1;
-    }
+    char *beginningOfT = t;
+    char *beginningOfS = s;
 
-    while (*s && *t)
+    // loop on s++ followed by a single s-- instead of simply looping on ++s
+    // because this approach will correctly handle empty strings
+    while (*s++)
+        ;
+
+    while (*t++)
+        ;
+
+    s--;
+    t--;
+
+    for (; *s == *t; --s, --t)
     {
-        if (*s++ == *t)
+        if (s == beginningOfS)
         {
-            t++;
+            return t == beginningOfT;
         }
     }
 
-    return *s == *t;
+    return ++t == beginningOfT;
 }
 
 int main()
@@ -25,6 +34,7 @@ int main()
     char s2[32] = " World!";
     char s3[32] = "Hello World!";
     char s4[32] = "";
+    char s5[32] = "H!";
 
     printf("'%s' ends '%s'?: %d\n", s1, s1, strend(s1, s1));
     printf("'%s' ends '%s'?: %d\n", s2, s1, strend(s1, s2));
@@ -36,6 +46,7 @@ int main()
     printf("'%s' ends '%s'?: %d\n", s1, s4, strend(s4, s1));
     printf("'%s' ends '%s'?: %d\n", s4, s1, strend(s1, s4));
     printf("'%s' ends '%s'?: %d\n", s4, s4, strend(s4, s4));
+    printf("'%s' ends '%s'?: %d\n", s5, s3, strend(s3, s5));
 
     return 0;
 }
