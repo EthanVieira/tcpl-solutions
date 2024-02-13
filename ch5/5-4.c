@@ -3,8 +3,8 @@
 
 int strend(char *s, char *t)
 {
-    char *beginningOfT = t;
-    char *beginningOfS = s;
+    const char *beginningOfT = t;
+    const char *beginningOfS = s;
 
     // loop on s++ followed by a single s-- instead of simply looping on ++s
     // because this approach will correctly handle empty strings
@@ -28,6 +28,11 @@ int strend(char *s, char *t)
     return ++t == beginningOfT;
 }
 
+void testStrEnd(char *s, char *t)
+{
+    printf("'%s' ends '%s'?: %d\n", t, s, strend(s, t));
+}
+
 int main()
 {
     char s1[32] = "Hello";
@@ -36,17 +41,16 @@ int main()
     char s4[32] = "";
     char s5[32] = "H!";
 
-    printf("'%s' ends '%s'?: %d\n", s1, s1, strend(s1, s1));
-    printf("'%s' ends '%s'?: %d\n", s2, s1, strend(s1, s2));
-    printf("'%s' ends '%s'?: %d\n", s3, s1, strend(s1, s3));
-    printf("'%s' ends '%s'?: %d\n", s1, s2, strend(s2, s1));
-    printf("'%s' ends '%s'?: %d\n", s3, s2, strend(s2, s3));
-    printf("'%s' ends '%s'?: %d\n", s1, s3, strend(s3, s1));
-    printf("'%s' ends '%s'?: %d\n", s2, s3, strend(s3, s2));
-    printf("'%s' ends '%s'?: %d\n", s1, s4, strend(s4, s1));
-    printf("'%s' ends '%s'?: %d\n", s4, s1, strend(s1, s4));
-    printf("'%s' ends '%s'?: %d\n", s4, s4, strend(s4, s4));
-    printf("'%s' ends '%s'?: %d\n", s5, s3, strend(s3, s5));
+    testStrEnd(s1, s1);
+    testStrEnd(s1, s2);
+    testStrEnd(s1, s3);
+    testStrEnd(s2, s1);
+    testStrEnd(s3, s1);
+    testStrEnd(s3, s2);
+    testStrEnd(s4, s1);
+    testStrEnd(s1, s4);
+    testStrEnd(s4, s4);
+    testStrEnd(s3, s5);
 
     return 0;
 }
