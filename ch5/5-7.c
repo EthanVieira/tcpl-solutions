@@ -101,7 +101,6 @@ int main()
     {
         qsort(linePtr, 0, nlines - 1);
         writeLines(linePtr, nlines);
-        returnCode = 0;
     }
     else
     {
