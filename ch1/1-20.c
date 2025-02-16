@@ -2,7 +2,6 @@
 
 #define TABSTOP 4
 
-
 int main()
 {
     int c;
@@ -12,7 +11,8 @@ int main()
     {
         if (c == '\t')
         {
-            for (int i = 0; i < TABSTOP - (currentCharIndex % TABSTOP); i++)
+            const int spacesToAdd = TABSTOP - (currentCharIndex % TABSTOP);
+            for (int i = 0; i < spacesToAdd; i++)
             {
                 putchar(' ');
                 currentCharIndex++;
@@ -32,4 +32,3 @@ int main()
 
     return 0;
 }
-

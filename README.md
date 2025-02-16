@@ -1,5 +1,5 @@
 # TCPL-solutions
-My Solutions to The C Programming Language by K&R.
+My Solutions to the exercises in The C Programming Language by K&R.
 
 - [Chapter 1 - A Tutorial Introduction](ch1)
 - [Chapter 2 - Types, Operators, and Expressions](ch2)
